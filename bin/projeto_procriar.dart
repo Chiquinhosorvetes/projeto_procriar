@@ -1,56 +1,40 @@
-import 'dart:mirrors';
+//ESW 4º A
+//Exercício Simulação com coelhos
+//Autor: Lizzandra Oliveira Alves Costa
+//RA: 151626-2023.
 
 void main (){
+  //Variaveis
+  double jovens = 0;
+  double adultos = 2;
+  int mes;
 
-  //Coelhos jovens
-   int jovens = 0;
+  print('Projeto Procriação: Iniciamos com população de: ${jovens+adultos}, sendo: Jovens $jovens, Adultos $adultos\n');
+  //FOR para o looping do projeto
+  for (mes = 1; mes <=24; mes++) {
 
-   //Coelhos adultos
-   int adultos = 2;
+  //Matança após o 12º mês
+    if(mes>12){
+      adultos = (adultos ~/4).toDouble(); // ~/ usado para reduzir a população em 1/4 reduzindo em 75%.
+      jovens = (jovens ~/4).toDouble();
+    }
 
-   //Mês 
-   int mes = 1;
+    //Cálculo da Procriação
+    adultos += jovens;
+    jovens = 0;
 
-   print("=====Etapa de procriação=====\n");
-   
+    //Procriação
+  jovens += adultos;
 
-   //Procriação em 12 meses
-   for (mes = 1; mes<=12; mes++){
-    
-    int novoscoelhosAdultos = jovens; // Coelhos viram adultos
-    int novoscoelhosJovens = adultos; // PRocriam pra jovens
+  final total = jovens+adultos;
 
-    //Atualizando o ninho
-    adultos += novoscoelhosAdultos;
-    jovens += novoscoelhosJovens;
-
-    //População total de coelhos
-
-    int total = jovens + adultos;
-
-  print("Fim do mês $mes: População de coelhos: $total, Jovens: $jovens, Adultos: $adultos");
-}
-
-   print("\n\n=====Etapa de caça=====" );
-
-   //Depois do 12º mês chega um predador
-   for (mes = 13; mes <= 24; mes++){
-    //Continuamos com a procriação
-
-    int novoscoelhosAdultos = jovens;
-    int novoscoelhosJovens = adultos;
-
-    adultos += novoscoelhosAdultos; // Continuamos atualizando 
-    jovens = novoscoelhosJovens;
-
-    //Agora vamos começar a matança onde (75%morre, e sobram 25%)
-
-    adultos = (adultos * 0.25).toInt();
-    jovens = (jovens * 0.25).toInt();
-
-    int total = jovens + adultos;
-
-    print("Fim do mês $mes: População total de coelhos depois da matança: $total");
+  //Procriação em 12 meses
+  if (mes <=12) {
+    print('Fim do mês $mes: População de Coelhos: $total, Jovens: $jovens, Adultos: $adultos\n');
+  //Matança iniciada no 13º mês
+  }else {
+    print('Fim do mês $mes com a matança: População de Coelhos: $total, Jovens: $jovens, Adultos: $adultos');
   }
 
+  }
 }
